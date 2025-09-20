@@ -1,0 +1,21 @@
+proxies:
+  - name: "SS-Server"
+    type: ss
+    server: '43.162.123.175'   #改ip
+    port: 8388
+    cipher:  chacha20-ietf-poly1305 # 这个改成 config.json 中method的地址
+    password: "MySZGa0sNP4O"  # 这个改成 config.json 中password的密码
+    udp: true
+
+proxy-groups:
+  - name: "PROXY"
+    type: select
+    proxies:
+      - "SS-Server"
+
+rules:
+  - DOMAIN-SUFFIX,google.com,PROXY
+  - DOMAIN-SUFFIX,youtube.com,PROXY
+  - DOMAIN-SUFFIX,github.com,PROXY
+  - GEOIP,CN,DIRECT
+  - MATCH,PROXY
