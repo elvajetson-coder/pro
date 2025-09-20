@@ -1,0 +1,21 @@
+proxies:
+  - name: "SS-Server"
+    type: ss
+    server: 43.162.123.175   # 改为你的公网IP
+    port: 8388
+    cipher: chacha20-ietf-poly1305   # 必须与服务端 method 一致
+    password: "MySZGa0sNP4O"
+    udp: true
+
+proxy-groups:
+  - name: "PROXY"
+    type: select
+    proxies:
+      - "SS-Server"
+
+rules:
+  - DOMAIN-SUFFIX,google.com,PROXY
+  - DOMAIN-SUFFIX,youtube.com,PROXY
+  - DOMAIN-SUFFIX,github.com,PROXY
+  - GEOIP,CN,DIRECT
+  - MATCH,PROXY
